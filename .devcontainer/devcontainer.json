@@ -1,0 +1,37 @@
+{
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "service": "truffle-suite",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "docker.explorerRefreshInterval": 3000,
+    "files.eol": "\n",
+    "files.exclude": {
+      "**/.vagrant": true,
+      "**/.git": true
+    },
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "/bin/bash",
+        "args": []
+      }
+    },
+  },
+  "extensions": [
+    "aaron-bond.better-comments",
+    "ms-vscode.atom-keybindings",
+    "wholroyd.hcl",
+    "ms-vscode-remote.remote-containers",
+    "esbenp.prettier-vscode",
+    "juanblanco.solidity",
+    "tintinweb.solidity-visual-auditor"
+  ],
+  "forwardPorts": [
+    7545
+  ],
+  // "mounts": [
+  //   "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  // ],
+  "remoteUser": "node"
+}
