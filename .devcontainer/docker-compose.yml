@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 services:
   # start the ganache cli container
   ganache-cli:
@@ -15,16 +15,26 @@ services:
         "--host",
         "0.0.0.0",
       ]
+    expose:
+      - 8545
     ports:
-      - 5545:7545
+      - 8545:8545
     networks:
       - ganache-network
   truffle-suite:
     container_name: truffle-suite
-    image: crizstian/devcontainer-truffle:latest
+    # image: crizstian/devcontainer-truffle:latest
+    build:
+      context: ../contrib/docker
+      dockerfile: truffle.Dockerfile
     volumes:
-      - "..:/workspace"
-    stdin_open: true
-    tty: true
+      - ..:/workspace:cached
+    depends_on:
+      - ganache-cli
+    networks:
+      - ganache-network
+    links:
+      - ganache-cli:ganache-cli
+    command: /bin/sh -c "while sleep 1000; do :; done"
 networks:
   ganache-network:
