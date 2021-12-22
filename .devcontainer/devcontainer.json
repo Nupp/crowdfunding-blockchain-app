@@ -27,9 +27,7 @@
     "juanblanco.solidity",
     "tintinweb.solidity-visual-auditor"
   ],
-  "forwardPorts": [
-    7545
-  ],
+  "forwardPorts": [],
   // "mounts": [
   //   "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   // ],
