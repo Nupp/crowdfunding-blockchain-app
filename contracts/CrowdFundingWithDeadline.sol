@@ -9,6 +9,8 @@ contract CrowdFundingWithDeadline {
         PaidOut
     }
 
+    event CampaignFinished(address addr, uint totalCollected, bool succeeded);
+
     string public name;
     uint256 public targetAmount;
     uint256 public fundingDeadline;
@@ -49,6 +51,23 @@ contract CrowdFundingWithDeadline {
         }
     }
 
+    function collect() public inState(State.Succeeded) {
+        if (payable(beneficiary).send(totalCollected)) {
+            state = State.PaidOut;
+        } else {
+            state = State.Failed;
+        }
+    }
+
+    function withdraw() public inState(State.Failed) {
+        require(amounts[msg.sender] > 0, "Nothing was contributed");
+        uint contributed = amounts[msg.sender];
+        amounts[msg.sender] = 0;
+
+        if (!payable(msg.sender).send(contributed)) {
+            amounts[msg.sender] = contributed;
+        }
+    }
     function beforeDeadline() public view returns(bool) {
         return currentTime() < fundingDeadline;
     }
@@ -60,6 +79,8 @@ contract CrowdFundingWithDeadline {
         } else {
             state = State.Succeeded;
         }
+
+        emit CampaignFinished(address(this), totalCollected, collected);
     }
 
     function currentTime() virtual internal view returns (uint256) {

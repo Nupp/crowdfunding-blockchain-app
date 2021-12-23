@@ -85,5 +85,42 @@ contract('CrowdFundingWithDeadline', (accounts) => {
     expect(state.valueOf().toString()).to.equal(FAILED_STATE)
   })
 
+  it('collected money paid out', async () => {
+    await this.instance.contribute({
+      value: ONE_ETH,
+      from: contractCreator
+    })
+    await this.instance.setCurrentTime(601)
+    await this.instance.finishCrowdFunding()
 
+    let initAmount = await web3.eth.getBalance(beneficiary)
+    await this.instance.collect({from: contractCreator})
+
+    let newBalance = await web3.eth.getBalance(beneficiary)
+    expect((newBalance - initAmount).toString()).to.equal(ONE_ETH)
+
+    let fundingState = await this.instance.state()
+    expect(fundingState.valueOf().toString()).to.equal(PAIDOUT_STATE)
+  })
+
+  it('withdraw funds from the contract', async () => {
+    await this.instance.contribute({
+      value: ONE_ETH - 100,
+      from: contractCreator
+    })
+    await this.instance.setCurrentTime(601)
+    await this.instance.finishCrowdFunding()
+
+    await this.instance.withdraw({from: contractCreator})
+    let amount = await this.instance.amounts(contractCreator)
+    expect(amount.toNumber()).to.equal(0)
+  })
+
+  it('event is emitted', async () => {
+    // let wathcer = this.instance.CampaignFinished()
+    await this.instance.setCurrentTime(601)
+    let receipt = await this.instance.finishCrowdFunding()
+    // Test that a CampaignFinished event was emitted with the new value
+    expectEvent(receipt, 'CampaignFinished', { addr: this.instance.address, totalCollected: '0', succeeded: false });
+  })
 })

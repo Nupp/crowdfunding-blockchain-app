@@ -25,7 +25,8 @@
     "ms-vscode-remote.remote-containers",
     "esbenp.prettier-vscode",
     "juanblanco.solidity",
-    "tintinweb.solidity-visual-auditor"
+    "tintinweb.solidity-visual-auditor",
+    "ms-azuretools.vscode-docker"
   ],
   "forwardPorts": [],
   // "mounts": [

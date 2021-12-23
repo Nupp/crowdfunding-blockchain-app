@@ -15,6 +15,10 @@
 # RUN su node -c "npm install -g truffle"
 FROM node:alpine
 
+USER root
+
+RUN apk add --no-cache --virtual .build-deps-full git
+
 RUN npm install -g truffle
 
 WORKDIR /workspace
