@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.10;
 
+import "./Utils.sol";
 contract CrowdFundingWithDeadline {
+    using Utils for *;
+
     enum State {
         Ongoing,
         Failed,
@@ -32,8 +35,8 @@ contract CrowdFundingWithDeadline {
         address beneficiaryAddress
     ) {
         name = contractName;
-        targetAmount = targetAmountEth * 1 ether;
-        fundingDeadline = currentTime() + (durationInMin * 1 minutes);
+        targetAmount = Utils.etherToWei(targetAmountEth);
+        fundingDeadline = currentTime() + Utils.minToSec(durationInMin);
         beneficiary = beneficiaryAddress;
         state = State.Ongoing;
     }

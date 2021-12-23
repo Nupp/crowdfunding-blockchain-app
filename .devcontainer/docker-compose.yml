@@ -28,7 +28,7 @@ services:
       context: ../contrib/docker
       dockerfile: truffle.Dockerfile
     volumes:
-      - ..:/workspace:cached
+      - ..:/workspace:delegated
     depends_on:
       - ganache-cli
     networks:
