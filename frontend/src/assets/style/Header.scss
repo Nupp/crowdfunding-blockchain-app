@@ -1,0 +1,23 @@
+.header {
+background-color: rgb(247, 247, 247);
+  display: flex;
+
+}
+
+.header li{
+  display: inline;
+font-size: 34px;
+}
+
+.header a {
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-size: 24px;
+  padding-left: 30px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}

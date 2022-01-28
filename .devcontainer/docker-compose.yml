@@ -18,9 +18,25 @@ services:
     expose:
       - 8545
     ports:
-      - 8545:8545
+      - 8545:7545
     networks:
       - ganache-network
+  dapp-suite:
+    container_name: dapp-suite
+    build:
+      context: ../contrib/docker
+      dockerfile: react.Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ..:/workspace:delegated
+    depends_on:
+      - ganache-cli
+    networks:
+      - ganache-network
+    links:
+      - ganache-cli:ganache-cli
+    command: /bin/sh -c "while sleep 1000; do :; done"
   truffle-suite:
     container_name: truffle-suite
     # image: crizstian/devcontainer-truffle:latest

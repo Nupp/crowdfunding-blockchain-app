@@ -13,12 +13,11 @@
 
 # # [Optional] Uncomment if you want to install more global node modules
 # RUN su node -c "npm install -g truffle"
-FROM node:alpine
+FROM node:lts-alpine
 
 USER root
 
 RUN apk update && apk upgrade && apk add --no-cache git docker openrc python3 make g++
 RUN rc-update add docker boot
-RUN npm install -g truffle
 
-WORKDIR /workspace
+WORKDIR /workspace/frontend
