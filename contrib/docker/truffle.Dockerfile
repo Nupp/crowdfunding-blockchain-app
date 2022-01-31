@@ -17,7 +17,7 @@ FROM node:alpine
 
 USER root
 
-RUN apk update && apk upgrade && apk add --no-cache git docker openrc python3 make g++
+RUN apk update && apk upgrade && apk add --no-cache git docker openrc python3 make g++ libstdc++
 RUN rc-update add docker boot
 RUN npm install -g truffle
 

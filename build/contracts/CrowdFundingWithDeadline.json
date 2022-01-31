@@ -14934,14 +14934,14 @@
     "57771": {
       "events": {},
       "links": {
-        "Utils": "0x7034dD8b10C4AA30c05b4e5eC3Dd07a2898601A5"
+        "Utils": "0xa7Ee58E7FeC71A5FA4E7767089655F3DB88Aa7B6"
       },
-      "address": "0xc966DAd3De58F9dec45450A77638436CdEAC59e2",
-      "transactionHash": "0xc5fe0000c6c79a077f0cc9451a3ff61bead435a06c7fe6ce85a2f11246be4cd3"
+      "address": "0xCcc642e64155E7591ab1bD85A6ED939DaEeF0fCA",
+      "transactionHash": "0xb193cdf286b0faa8964a031f4e34682360af02d8fbe4ce313fc03c5f9026f3bf"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2021-12-23T23:31:18.424Z",
+  "updatedAt": "2022-01-31T03:50:19.041Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

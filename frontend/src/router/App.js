@@ -5,9 +5,6 @@ import Estadisticas from '../containers/Estadisticas';
 import Formulario from '../containers/Formulario';
 import NotFound from '../containers/NotFound';
 import Layout from '../components/Layout';
-import { createBrowserHistory } from "history";
-
-const history = createBrowserHistory();
 
 const App = () => (
 

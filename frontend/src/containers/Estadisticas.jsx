@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Button } from "reactstrap";
 import swal from "sweetalert";
 import { createContract } from './../ethereum/crowdfundingContract'
@@ -7,8 +7,6 @@ import { useParams } from 'react-router-dom'
 
 const Estadistica = () => {
   let params = useParams()
-
-  console.log(params)
 
   const ONGOING_STATE = "0";
   const FAILED_STATE = "1";
@@ -41,14 +39,16 @@ const Estadistica = () => {
     });
   };
 
-
-  const componentDidMount = async () => {
-    const currentCampaign = await getCampaign(getCampaignAddress())
-    setState({
-      ...state,
-      campaign: currentCampaign
-    })
-  }
+  useEffect(() => {
+    const componentMount = async () => {
+      const currentCampaign = await getCampaign(getCampaignAddress())
+      setState({
+        ...state,
+        campaign: currentCampaign
+      })
+    }
+    componentMount()
+  }, [params.address])
 
   const getCampaignAddress = () => {
     return params.address
@@ -56,40 +56,29 @@ const Estadistica = () => {
 
   const getCampaign = async (address) => {
     console.log("getCampaign: "+address)
-    // const contract = createContract(address)
+    const contract = createContract(address)
 
-    // const name            = await contract.methods.name().call()
-    // const targetAmount    = await contract.methods.targetAmount().call()
-    // const totalCollected  = await contract.methods.totalCollected().call()
-    // const beforeDeadline  = await contract.methods.beforeDeadline().call()
-    // const beneficiary     = await contract.methods.beneficiary().call()
-    // const deadlineSeconds = await contract.methods.fundingDeadline().call()
-    // const state           = await contract.methods.state().call()
+    const name            = await contract.methods.name().call()
+    const targetAmount    = await contract.methods.targetAmount().call()
+    const totalCollected  = await contract.methods.totalCollected().call()
+    const beforeDeadline  = await contract.methods.beforeDeadline().call()
+    const beneficiary     = await contract.methods.beneficiary().call()
+    const deadlineSeconds = await contract.methods.fundingDeadline().call()
+    const state           = await contract.methods.state().call()
 
-    // var deadlineDate = new Date(0);
-    // deadlineDate.setUTCSeconds(deadlineSeconds)
+    var deadlineDate = new Date(0);
+    deadlineDate.setUTCSeconds(deadlineSeconds)
 
-    // const accounts = await web3.eth.getAccounts()
-
-    // return {
-    //   name: name,
-    //   targetAmount: targetAmount,
-    //   totalCollected: totalCollected,
-    //   campaignFinished: !beforeDeadline,
-    //   deadline: deadlineDate,
-    //   isBeneficiary: beneficiary.toLowerCase() === accounts[0].toLowerCase(),
-    //   state: state
-    // }
-
+    const accounts = await web3.eth.getAccounts()
 
     return {
-      name: 'contract name',
-      targetAmount: 100,
-      totalCollected: 50,
-      campaignFinished: false,
-      deadline: new Date(),
-      isBeneficiary: true,
-      state: ONGOING_STATE
+      name: name,
+      targetAmount: targetAmount,
+      totalCollected: totalCollected,
+      campaignFinished: !beforeDeadline,
+      deadline: deadlineDate,
+      isBeneficiary: beneficiary.toLowerCase() === accounts[0].toLowerCase(),
+      state: state
     }
   }
 

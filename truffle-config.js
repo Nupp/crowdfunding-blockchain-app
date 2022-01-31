@@ -18,10 +18,10 @@
  *
  */
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
+// const HDWalletProvider = require('@truffle/hdwallet-provider');
 
-const fs = require('fs');
-const mnemonic = fs.readFileSync(".secret").toString().trim();
+// const fs = require('fs');
+// const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
 	/**
@@ -41,10 +41,11 @@ module.exports = {
 		// tab if you use this network and you must also set the `host`, `port` and `network_id`
 		// options below to some value.
 		//
-		development: {
+		ganache: {
 			host: "ganache-cli", // Localhost (default: none)
-			port: 8545, // Standard Ethereum port (default: none)
-			network_id: "*", // Any network (default: none)
+			port: 7545, 	 	 // Standard Ethereum port (default: none)
+			gas: 5000000,     	 // Gas sent with each transaction (default: ~6700000)
+			network_id: "*", 	 // Any network (default: none)
 		},
 		// Another network with more advanced options...
 		// advanced: {

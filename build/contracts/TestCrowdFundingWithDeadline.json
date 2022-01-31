@@ -9845,12 +9845,12 @@
     "57771": {
       "events": {},
       "links": {
-        "Utils": "0x7034dD8b10C4AA30c05b4e5eC3Dd07a2898601A5"
+        "Utils": "0xa7Ee58E7FeC71A5FA4E7767089655F3DB88Aa7B6"
       }
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2021-12-23T23:30:50.792Z",
+  "updatedAt": "2022-01-31T03:50:10.004Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

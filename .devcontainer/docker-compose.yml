@@ -3,22 +3,23 @@ services:
   # start the ganache cli container
   ganache-cli:
     container_name: ganache-cli
-    image: trufflesuite/ganache-cli
+    image: trufflesuite/ganache:latest
     entrypoint:
       [
         "node",
-        "/app/ganache-core.docker.cli.js",
-        "--quiet",
-        "--networkId",
+        "/app/dist/node/cli.js",
+        "-i",
         "57771",
-        "--verbose",
-        "--host",
+        "-v",
+        "--port",
+        "7545",
+        "-h",
         "0.0.0.0",
       ]
     expose:
-      - 8545
+      - 7545
     ports:
-      - 8545:7545
+      - 7545:7545
     networks:
       - ganache-network
   dapp-suite:
